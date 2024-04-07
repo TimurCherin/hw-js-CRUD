@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <h1>Movies</h1>
@@ -36,6 +37,37 @@
           <button class="add_movie__btn" type="submit">Add movie</button>
         </form>
       </div>
+      <div class="backdrop hide">
+        <div class="modal">
+            <button type="button" class="close-btn">X</button>
+            <form class="modal-form">
+              <input
+              type="text"
+              placeholder="title"
+              class="add-movie__input title"
+              name="title"
+            />
+            <input
+              type="text"
+              class="add-movie__input genre"
+              name="genre"
+            />
+            <input
+              type="text"
+              placeholder="director"
+              class="add-movie__input director"
+              name="director"
+            />
+            <input
+              type="text"
+              placeholder="year"
+              class="add-movie__input year"
+              name="year"
+            />
+                <button class="submit-btn submit-button" type="submit">Edit info</button>
+            </form>
+        </div>
+    </div>
       <ul class="movie_list"></ul>
     <script src="./index.js" type="module"></script>
 </body>

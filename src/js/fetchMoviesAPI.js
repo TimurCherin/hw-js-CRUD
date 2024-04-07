@@ -1,4 +1,5 @@
 import { createMoviesMarkup } from "./createMoviesMarkup";
+import { renderAllMovies } from "./renderAllMovies";
 const movieList = document.querySelector(".movie_list");
 const url = "http://localhost:3000/movies";
 
@@ -29,5 +30,36 @@ export const addMovie = (newMovie) =>
     },
   })
     .then((res) => res.json())
-    .then((res) => console.log(res))
+    .then((res) => renderAllMovies())
+    .catch((err) => console.log(err));
+
+export const editMovie = (id,changeMovie) =>
+    fetch(`${url}/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(changeMovie),
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => renderAllMovies())
+    .catch((err) => console.log(err));
+
+export const updateMovie = (id,changeMovie) =>
+    fetch(`${url}/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify(changeMovie),
+    headers: {
+      "Content-Type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => renderAllMovies())
+    .catch((err) => console.log(err));
+
+export const removeMovie = (id) =>
+    fetch(`${url}/${id}`, {
+    method: "DELETE"
+  })
+    .then((res) => renderAllMovies())
     .catch((err) => console.log(err));
