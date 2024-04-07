@@ -5,7 +5,11 @@ const addMovieForm = document.querySelector(".add-movie__form");
 const movieList = document.querySelector(".movie_list");
 const backdrop = document.querySelector(".backdrop")
 const closeBtn = document.querySelector(".close-btn")
-const submitBtn = document.querySelector(".submit-btn")
+const submitForm = document.querySelector(".modal-form")
+let titleInput = document.querySelector(".title")
+const genreInput = document.querySelector(".genre")
+const directorInput = document.querySelector(".director")
+const yearInput = document.querySelector(".year")
 
 movieList.addEventListener("click", changeMovie)
 function changeMovie(e){
@@ -13,10 +17,9 @@ function changeMovie(e){
     const movieId = e.target.dataset.id
     if(e.target.classList.contains("editBtn")){
       backdrop.classList.remove("hide")
-      submitBtn.addEventListener('submit',onEdit)
+      submitForm.addEventListener('submit',onEdit)
       
       function onEdit(e){
-        console.log(1)
         e.preventDefault();
         const data = e.currentTarget.elements
         const changedMovie = {
@@ -24,13 +27,41 @@ function changeMovie(e){
           genre: data.genre.value,
           director: data.director.value,
           year: data.year.value
-        };
-        
-        // evt.currentTarget.reset();
+        };  
+        e.currentTarget.reset();
+        backdrop.classList.add("hide")
+        submitForm.removeEventListener('submit',onEdit)
+        editMovie(movieId,changedMovie)
       }
     }
     if(e.target.classList.contains("updateBtn")){
-      console.log(111)
+      backdrop.classList.remove("hide")
+      submitForm.addEventListener('submit',onUpdate)
+      const parentEl = e.target.closest("li")
+      titleInput.value = parentEl.children[0].textContent
+      genreInput.value = parentEl.children[1].textContent
+      directorInput.value = parentEl.children[2].textContent
+      yearInput.value = parentEl.children[3].textContent
+      const titleValue = titleInput.value
+      const genreValue = genreInput.value
+      const directorValue = directorInput.value
+      const yearValue = yearInput.value
+
+      function onUpdate(e){
+        e.preventDefault();
+        console.log(titleInput)
+        const data = e.currentTarget.elements
+        const changedMovie = {}
+        titleValue === data.title.value ? "" : changedMovie.title=data.title.value
+        genreValue === data.genre.value ? "" : changedMovie.genre=data.genre.value
+        directorValue === data.director.value ? "" : changedMovie.director=data.director.value
+        yearValue === data.year.value ? "" : changedMovie.year=data.year.value
+        console.log(changedMovie)
+        e.currentTarget.reset();
+        backdrop.classList.add("hide")
+        submitForm.removeEventListener('submit',onUpdate)
+        updateMovie(movieId,changedMovie)
+      }
     }
     if(e.target.classList.contains("removeBtn")){
       removeMovie(movieId)
