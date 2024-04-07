@@ -43,4 +43,19 @@
    }
    ul {
     list-style: none;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+   }
+   li{
+    border: solid rgb(45, 244, 151) 2px;
+    border-radius: 15%;
+    padding: 15px;
+   }
+   button{
+    border: solid rgb(45, 244, 151) 2px;
+    border-radius: 15%;
+    padding: 15px;
+    background-color: black;
+    color: white;
    }
